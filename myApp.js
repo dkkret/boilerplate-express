@@ -9,7 +9,7 @@ console.log('Hello World')
 
 app.get('/', (req, res) => {
     const path = __dirname + '/views/index.html'
-    res.send(path)
+    res.sendFile(path)
 })
 
 
