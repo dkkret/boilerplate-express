@@ -8,9 +8,12 @@ console.log('Hello World')
 // })
 
 app.get('/', (req, res) => {
-    const path = __dirname + '/views/index.html'
-    res.sendFile(path)
+    const pathFile = __dirname + '/views/index.html'
+    res.sendFile(pathFile)
 })
+
+
+app.use(__dirname + '/public', express.static)
 
 
 
