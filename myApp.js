@@ -28,6 +28,13 @@ app.get('/:word/echo', (req, res, next) => {
 
 })
 
+app.get('/name', (req, res, next) => {
+    next()
+}, (req, res) => {
+    const userData = req.query
+    res.json({name: `${userData.first} ${userData.last}`})
+})
+
 // app.get('/', (req, res) => {
 //     res.send("Hello Express")
 // })
