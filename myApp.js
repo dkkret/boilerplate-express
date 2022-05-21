@@ -1,8 +1,12 @@
 require('dotenv').config()
+let bodyParser = require('body-parser')
 let express = require('express');
 let app = express();
 
 console.log('Hello World')
+
+//add body parser
+app.use(bodyParser.urlencoded({extended: false}))
 
 //add log middlerware at the root level
 app.use((req, res, next) => {
@@ -47,14 +51,26 @@ app.get('/', (req, res) => {
     res.sendFile(pathFile)
 })
 
-app.get('/json', (req, res) => {
-    const obj = {"message": "Hello json"}
+// app.get('/json', (req, res) => {
+//     const obj = {"message": "Hello json"}
 
-    if( process.env.MESSAGE_STYLE === 'uppercase') {
-        obj.message = obj.message.toUpperCase()
-    }
+//     if( process.env.MESSAGE_STYLE === 'uppercase') {
+//         obj.message = obj.message.toUpperCase()
+//     }
     
-    res.json(obj)
+//     res.json(obj)
+// })
+
+app.route('/name').get((req, res, next) =>{
+    next()
+}, (req, res) => {
+    const userData = req.query
+    res.json({name: `${userData.first} ${userData.last}`})
+}).post((req, res, next) => {
+    next()
+}, (req, res) => {
+    const userData = req.query
+    res.json({name: `${userData.first} ${userData.last}`})
 })
 
 
