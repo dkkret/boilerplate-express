@@ -4,6 +4,17 @@ let app = express();
 
 console.log('Hello World')
 
+//add log middlerware at the root level
+app.use((req, res, next) => {
+    const method = req.method
+    const path = req.path
+    const ip = req.ip
+
+    console.log(`${method} ${path} - ${ip}`)
+    next()
+})
+
+
 // app.get('/', (req, res) => {
 //     res.send("Hello Express")
 // })
